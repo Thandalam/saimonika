@@ -170,21 +170,21 @@ def create_access_token(data: Dict) -> str:
     return encoded_jwt
 
 def authenticate_user(username: str, plain_password: str) -> User:
-    """
-    Authenticates a user with the given username and plain-text password.
+    # """
+    # Authenticates a user with the given username and plain-text password.
 
-    Parameters:
-        username (str): The username of the user to authenticate.
-        plain_password (str): The plain-text password of the user to authenticate.
+    # Parameters:
+    #     username (str): The username of the user to authenticate.
+    #     plain_password (str): The plain-text password of the user to authenticate.
 
-    Returns:
-        Union[User, bool]: The authenticated user object as a `User` instance, or `False`
-        if the user is not found or the password is incorrect.
+    # Returns:
+    #     Union[User, bool]: The authenticated user object as a `User` instance, or `False`
+    #     if the user is not found or the password is incorrect.
 
-    Raises:
-        Union[bool, User]: If authentication fails, returns False. Otherwise,
-        returns a User object for the authenticated user.
-    """
+    # Raises:
+    #     Union[bool, User]: If authentication fails, returns False. Otherwise,
+    #     returns a User object for the authenticated user.
+    # """
     user = get_user(username)
     if not user:
         return False
@@ -193,23 +193,23 @@ def authenticate_user(username: str, plain_password: str) -> User:
     return user
 
 def decode_token(token: str) -> User:
-    """
-    Decode a JWT token and return the associated user,
-    or redirect to the login page if the token is invalid.
+    # """
+    # Decode a JWT token and return the associated user,
+    # or redirect to the login page if the token is invalid.
 
-    Parameters:
-        token (str): The JWT token to decode.
+    # Parameters:
+    #     token (str): The JWT token to decode.
 
-    Returns:
-        Union[User, RedirectResponse]: If the token is valid,
-        returns a User object for the associated user. Otherwise,
-        returns a RedirectResponse object that redirects to the login page.
+    # Returns:
+    #     Union[User, RedirectResponse]: If the token is valid,
+    #     returns a User object for the associated user. Otherwise,
+    #     returns a RedirectResponse object that redirects to the login page.
 
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials."
-    )
-    """
+    # credentials_exception = HTTPException(
+    #     status_code=status.HTTP_401_UNAUTHORIZED,
+    #     detail="Could not validate credentials."
+    # )
+    # """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials."
@@ -381,17 +381,17 @@ def home_page(request: Request):
 
 @APP.get("/auth/login", response_class=HTMLResponse)
 def login_get(request: Request):
-    """
-    A route function that handles HTTP GET requests for the login page.
+    # """
+    # A route function that handles HTTP GET requests for the login page.
 
-    Args:
-        request (Request): A `Request` object representing the incoming HTTP request.
+    # Args:
+    #     request (Request): A `Request` object representing the incoming HTTP request.
 
-    Returns:
-        A `TemplateResponse` object that renders the "login.html"
-        template with the given request context.
-        The response's `Content-Type` header is set to "login/html".
-    """
+    # Returns:
+    #     A `TemplateResponse` object that renders the "login.html"
+    #     template with the given request context.
+    #     The response's `Content-Type` header is set to "login/html".
+    # """
     context = {
         "request": request
     }
@@ -426,6 +426,26 @@ async def login_post(request: Request):
             raise HTTPException(status_code=400, detail="Form data is not valid")
         # Form data is valid, generate new access token
         response = RedirectResponse("/", status.HTTP_302_FOUND)
+#         
+# 
+# 
+# # The login_for_access_token() function is called with the response 
+# object and the form data as arguments to generate the access token.
+# The form object's msg attribute is updated to indicate that the 
+# login was successful.
+# If an HTTPException is raised during the try block, 
+# the form object's errors attribute is updated with the
+#  error message and the code returns a TemplateResponse object 
+# that renders a login template with the updated form object.
+# If any other exception is raised during the try block,
+#  an HTTPException with a 500 status code and the exception message is raised.
+# Overall, this code handles the submission of a login 
+# form by validating the form data, generating an access token if the data is valid, and returning an appropriate response based on the success or failure of the login attempt.
+
+
+
+
+
         login_for_access_token(response=response, form_data=form)
         form.__dict__.update(msg="Login Successful!")
         return response
