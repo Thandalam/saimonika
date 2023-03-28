@@ -45,16 +45,16 @@ def verify_password(password: str, hashed_password: str):
 
 
 def get_user(email: str) -> User:
-    """
-    Return user data from the specified MongoDB collection based on the user's email address.
+    # """
+    # Return user data from the specified MongoDB collection based on the user's email address.
 
-    :param email: The email address of the user to retrieve data for.
-    :type email: str
-    :param collection: The MongoDB collection to retrieve data from.
-    :type collection: pymongo.collection.Collection
-    :return: A dictionary containing the user data, or None if the user does not exist.
-    :rtype: dict or None
-    """
+    # :param email: The email address of the user to retrieve data for.
+    # :type email: str
+    # :param collection: The MongoDB collection to retrieve data from.
+    # :type collection: pymongo.collection.Collection
+    # :return: A dictionary containing the user data, or None if the user does not exist.
+    # :rtype: dict or None
+    # """
     user = SIGNUP_COLLECTION.find_one({"Email":email})
     if user:
         return user
@@ -403,21 +403,21 @@ def login_get(request: Request):
 
 @APP.post("/auth/login", response_class=HTMLResponse)
 async def login_post(request: Request):
-    """
-    Handle a login request. :param request:
-    The HTTP request object representing the login request.
-    :return: A `TemplateResponse` object containing the rendered
-    "login.html" template. This function handles POST requests to
-    the "/auth/login" endpoint. It expects a valid
-    `LoginForm` object to be submitted in the request body. If the submitted form data is
-    valid, the user is redirected to the homepage ("/") with a newly created access token.
-    If the submitted form data is not valid,
-    the user is redirected back to the login page
-    with an error message indicating what went wrong.
-    Note that this function does not perform any authentication or authorization checks.
-    Those should be handled separately in a middleware or in the application's business
-    logic.
-    """
+    # """
+    # Handle a login request. :param request:
+    # The HTTP request object representing the login request.
+    # :return: A `TemplateResponse` object containing the rendered
+    # "login.html" template. This function handles POST requests to
+    # the "/auth/login" endpoint. It expects a valid
+    # `LoginForm` object to be submitted in the request body. If the submitted form data is
+    # valid, the user is redirected to the homepage ("/") with a newly created access token.
+    # If the submitted form data is not valid,
+    # the user is redirected back to the login page
+    # with an error message indicating what went wrong.
+    # Note that this function does not perform any authentication or authorization checks.
+    # Those should be handled separately in a middleware or in the application's business
+    # logic.
+    # """
     form = LoginForm(request)
     await form.load_data()
     try:
@@ -444,12 +444,12 @@ async def login_post(request: Request):
 # --------------------------------------------------------------------------
 @APP.get("/signup", response_class=HTMLResponse)
 def get_signup_page(request: Request):
-    """Returns the HTML page for user signup. This function handles GET requests to the
-    "/signup" endpoint and returns the HTML page for user signup. The HTML page contains
-    a form that allows users to input their details to create an account. The page also
-    includes links to other relevant pages, such as the login page. :param request: The
-    HTTP request object. :return: A `TemplateResponse` object containing the signup HTML page.
-    """
+    # """Returns the HTML page for user signup. This function handles GET requests to the
+    # "/signup" endpoint and returns the HTML page for user signup. The HTML page contains
+    # a form that allows users to input their details to create an account. The page also
+    # includes links to other relevant pages, such as the login page. :param request: The
+    # HTTP request object. :return: A `TemplateResponse` object containing the signup HTML page.
+    # """
     try:
         return TEMPLATES.TemplateResponse("signuppage.html", {"request": request})
     except Exception as exception:
@@ -464,27 +464,27 @@ def get_signup_page(request: Request):
 @APP.post("/signup", response_class=HTMLResponse)
 def signup_page(request: Request, username: str = Form(...), email: str = Form(...),\
         password: str = Form(...), cpassword: str = Form(...)):
-    """
-    Handle user registration requests.    :param request: The HTTP request object.
-    :param username: The username for the new user, as a string.
-    :param email: The email address for the new user, as a string.
-    :param password: The password for the new user, as a string.
-    :param cpassword: The confirmed password for the new user, as a string.
-    :return: A `TemplateResponse` object with either the login template
-    or the signup template and an error message.
-    This function handles POST requests to the "/signup" endpoint.
-    It expects the "username", "email", "password"
-    and "cpassword" form fields to be included in the request data.
-    The password is hashed before being added to the database.
-    The function checks whether a user with the provided
-    email already exists in the database. If not,
-    and the provided password matches the confirmed password, the new user is added to the database
-    and a response with the login template is returned.
-    If a user with the provided email already exists or
-    the password does not match the confirmed password, a response with the signup template
-    and an appropriate error message is returned.    If an error occurs during database insertion,
-    an HTTPException with a 500 Internal Server Error status code is raised.
-    """
+    # """
+    # Handle user registration requests.    :param request: The HTTP request object.
+    # :param username: The username for the new user, as a string.
+    # :param email: The email address for the new user, as a string.
+    # :param password: The password for the new user, as a string.
+    # :param cpassword: The confirmed password for the new user, as a string.
+    # :return: A `TemplateResponse` object with either the login template
+    # or the signup template and an error message.
+    # This function handles POST requests to the "/signup" endpoint.
+    # It expects the "username", "email", "password"
+    # and "cpassword" form fields to be included in the request data.
+    # The password is hashed before being added to the database.
+    # The function checks whether a user with the provided
+    # email already exists in the database. If not,
+    # and the provided password matches the confirmed password, the new user is added to the database
+    # and a response with the login template is returned.
+    # If a user with the provided email already exists or
+    # the password does not match the confirmed password, a response with the signup template
+    # and an appropriate error message is returned.    If an error occurs during database insertion,
+    # an HTTPException with a 500 Internal Server Error status code is raised.
+    # """
     hashed_password = hash_password(password)
     user = User(Username=username, Email=email, Password=hashed_password,\
     CPassword=cpassword)
@@ -506,13 +506,13 @@ def signup_page(request: Request, username: str = Form(...), email: str = Form(.
 # --------------------------------------------------------------------------
 @APP.get("/auth/logout", response_class=HTMLResponse)
 def logout_get():
-    """
-    Handle a GET request to the logout endpoint.
-    This function deletes the authentication cookie and redirects the user to the root page ("/").
-    The authentication cookie is deleted by setting its value to an empty string and setting its
-    max age to 0. This ensures that the browser deletes the cookie on the client side.
-    :return: A `RedirectResponse` object that redirects the user to the root page ("/").
-    """
+    # """
+    # Handle a GET request to the logout endpoint.
+    # This function deletes the authentication cookie and redirects the user to the root page ("/").
+    # The authentication cookie is deleted by setting its value to an empty string and setting its
+    # max age to 0. This ensures that the browser deletes the cookie on the client side.
+    # :return: A `RedirectResponse` object that redirects the user to the root page ("/").
+    # """
     try:
         response = RedirectResponse(url="/auth/login")
         response.delete_cookie(SETTING.COOKIE_NAME)

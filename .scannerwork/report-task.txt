@@ -1,0 +1,6 @@
+projectKey=Scm
+serverUrl=http://localhost:9000
+serverVersion=9.9.0.65466
+dashboardUrl=http://localhost:9000/dashboard?id=Scm
+ceTaskId=AYcm_fe2Hxn-AvzAqzd_
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYcm_fe2Hxn-AvzAqzd_
