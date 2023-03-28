@@ -27,5 +27,3 @@ while True:
         print(e)
         client.close()
 
-
-
