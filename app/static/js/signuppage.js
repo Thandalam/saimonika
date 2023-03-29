@@ -47,31 +47,31 @@ container.addEventListener("click", (e) => {
 
 
 
-const pass_field = document.querySelector(".pass");
-const showBtn = document.querySelector(".show");
-showBtn.addEventListener("click", function () {
-    if (pass_field.type === "password") {
-        pass_field.type = "text";
-        showBtn.textContent = "HIDE";
-        showBtn.style.color = "#D052F6";
-    } else {
-        pass_field.type = "password";
-        showBtn.textContent = "SHOW";
-        showBtn.style.color = "#222";
-    }
-});
+// const pass_field = document.querySelector(".pass");
+// const showBtn = document.querySelector(".show");
+// showBtn.addEventListener("click", function () {
+//     if (pass_field.type === "password") {
+//         pass_field.type = "text";
+//         showBtn.textContent = "HIDE";
+//         showBtn.style.color = "#D052F6";
+//     } else {
+//         pass_field.type = "password";
+//         showBtn.textContent = "SHOW";
+//         showBtn.style.color = "#222";
+//     }
+// });
 
 
-const pass_fields = document.querySelector(".confirmpass");
-const showBtns = document.querySelector(".confirmpasswordshow");
-showBtn.addEventListener("click", function () {
-    if (pass_fields.type === "password") {
-        pass_fields.type = "text";
-        showBtns.textContent = "HIDE";
-        showBtns.style.color = "#D052F6";
-    } else {
-        pass_fields.type = "password";
-        showBtns.textContent = "SHOW";
-        showBtns.style.color = "#222";
-    }
-});
+// const pass_fields = document.querySelector(".confirmpass");
+// const showBtns = document.querySelector(".confirmpasswordshow");
+// showBtn.addEventListener("click", function () {
+//     if (pass_fields.type === "password") {
+//         pass_fields.type = "text";
+//         showBtns.textContent = "HIDE";
+//         showBtns.style.color = "#D052F6";
+//     } else {
+//         pass_fields.type = "password";
+//         showBtns.textContent = "SHOW";
+//         showBtns.style.color = "#222";
+//     }
+// });
