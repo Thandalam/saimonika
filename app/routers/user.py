@@ -351,7 +351,7 @@ class LoginForm:
         """
         if not self.login_user or not (self.login_user.__contains__("@")):
             self.errors.append("Email is required")
-        if not self.login_password or not len(self.login_password) >= 4:
+        if not self.login_password or len(self.login_password) < 4:
             self.errors.append("A valid password is required")
         if not self.errors:
             return True
