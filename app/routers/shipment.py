@@ -61,7 +61,7 @@ def get_shipment_page(request: Request, user: User = Depends(get_current_user_fr
         }
         return TEMPLATES.TemplateResponse(SHIPMENT_TEMPLATE, context)
     except Exception as e:
-       
+      
         raise HTTPException(status_code=500, detail=str(e))
 
 # --------------------------------------------------------------------------
